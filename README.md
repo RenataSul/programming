@@ -1,6 +1,6 @@
 # programming
-template <typename Type>
 
+template <typename Type>
 void Sort(Type *m1, Type *m2, Type *M)
 {
 	Type* a, * b;
