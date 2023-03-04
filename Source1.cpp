@@ -94,24 +94,108 @@ int main()
 {
 	setlocale(0, "rus");
 	int n1, n2;
-	cout << "Ââåäèòå m:" << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ m:" << endl;
 	cin >> n1;
-	cout << "Ââåäèòå n:" << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ n:" << endl;
 	cin >> n2;
 	int* m1 = new int[n1];
 	int* m2 = new int[n2];
 
-	cout << "Ââåäèòå m1:" << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ m1:" << endl;
 	for (int i = 0; i < n1; i++)
 	{
 		cin >> m1[i];
 	}
 
-	cout << "Ââåäèòå m2:" << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ m2:" << endl;
 	for (int i = 0; i < n2; i++)
 	{
 		cin >> m2[i];
 	}
 
 	Sort(m1, n1, m2, n2);
+}
+
+
+
+
+---------------------------------------------------------------
+	
+	â„–2
+	
+using namespace std;
+
+template <typename Type>
+void Sort(Type* m, int n)
+{
+	int j;
+	for (int i = n; i > 0; i--)
+	{
+		j = i;
+		while (j != 0)
+		{
+			if (m[j] > m[(j - 1) / 2]) swap(m[j], m[(j - 1) / 2]);
+			j--;
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << m[i] << " ";
+	}
+}
+
+template <typename Type>
+void Deletion(Type* m, int n, Type*NewM1)
+{
+	m[0] = m[n - 1];
+	for (int i = 0; i < n - 1; i++)
+	{
+		NewM1[i] = m[i];
+	}
+	Sort(NewM1, n-1);
+	cout << "\n ";
+}
+
+template <typename Type>
+void Insert(Type* m, int n, Type x, Type* NewM)
+{
+	for (int i = 0; i < n; i++)
+	{
+		NewM[i] = m[i];
+	}
+	NewM[n] = x;
+	Sort(NewM, n+1);
+}
+
+int main()
+{
+	setlocale(0, "rus");
+	int n;
+	cout << "n:" << endl;
+	cin >> n;
+	
+	int* m = new int[n];
+
+	cout << "m:" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> m[i];
+	}
+
+	Sort(m, n);
+
+	cout << "\n\nafter deletion";
+	int* NewM1 = new int[n - 1];
+	int maxx = m[0];
+	Deletion(m, n, NewM1);
+
+	int* NewM2 = new int[n];
+
+	int x;
+	cout <<"\n" << "Insert x:";
+	cin >> x;
+	cout << "\nafter insertion\n";
+	Insert(NewM1, n-1, x, NewM2);
+
 }
