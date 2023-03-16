@@ -146,3 +146,34 @@ int main()
     f.close();
 }
 
+//РЕЗУЛЬТАТЫ ВЫВОДА
+/*
+строка:
+Chapter 1
+
+It is a truth universally acknowledged, that a single man in possession of a good fortune
+статистика букв:
+8 0 2 3 7 2 3 3 6 0 1 4 1 7 7 2 0 4 7 7 3 1 1 0 1 0 0 0 0 0 0
+-----------------
+строка после шифрования:
+hmfuyjw 1
+
+ny nx f ywzym zsn{jwxfqq~ fhpst|qjilji, ymfy f xnslqj rfs ns utxxjxxnts tk f ltti ktwyzsj
+статистика букв:
+0 0 0 0 0 8 0 2 3 7 2 3 3 6 0 1 4 1 7 7 2 0 4 7 7 3 1 1 0 1 0
+-----------------
+строка после дешифровки:
+chapter 1
+
+it is a truth universally acknowledged, that a single man in possession of a good fortune
+-----------------
+после борьбы со статистическими неравномерностями
+
+cchhappterr  11
+
+
+
+iit  iis  a  trruuthh  uuniivverrsallllyy  acckknowwlleddggedd,,  thhat  a  siingglle  mman  iin  ppossessiion  off  a  ggoodd  fforrtuune
+НОВАЯ статистика букв:
+6 0 4 4 4 0 3 6 8 0 2 6 0 3 1 2 0 6 3 6 4 2 2 0 2 0 0 0 0 0 0
+*/
