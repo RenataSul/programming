@@ -7,6 +7,8 @@
 #include <vector>
 using namespace std;
 
+
+// Алгоритм Беллмана Форда
 struct Edges
 {
     int u, v, w; // ребра графа выходят из вершины v и входят в вершину u 
