@@ -48,6 +48,72 @@ void Bellman(int n, int start, int m) // m - количество ребер, n 
     }
 }
 
+
+//Алгоритм Дейкстра
+void Deijkstra(int n, int start) // m - количество ребер, n -  количество вершин
+{
+    bool* visited = new bool[n+1]; //если i = 0->вершина не посещена; i = 1->посещена
+    int** GR = new int* [n+1];
+    for (int i = 0; i < n+1; i++)
+    {
+        GR[i] = new int[n+1];
+    }
+
+    int s = 0;
+
+    for (int i = 1; i < n+1; i++)
+    {
+        for (int j = 1; j < n+1; j++)
+        {
+            GR[i][j] = edge[s].w;
+            s++;
+        }
+    }
+
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        d[i] = 1000000;
+        visited[i] = false;
+    }
+    d[start] = 0;
+    int index = 0, u = 0;
+
+    for (int i = 1; i < n; i++)
+    {
+        int min = 1000000;
+        for (int j = 1; j < n + 1; j++)
+        {
+            if (!visited[j] && d[j] <= min)
+            {
+                min = d[j];
+                index = j;
+            }
+        }
+        u = index;
+        visited[u] = true;
+        int maxx = 1000000;
+
+        for (int j = 1; j < n+1; j++)
+        {
+            if (!visited[j] && GR[u][j] != 1000000 && d[u] != 1000000 && (d[u] + GR[u][j] < d[j]))
+            //if (!visited[j] && edge[j].w != maxx && d[edge[j].v] != maxx && (d[edge[j].v] + edge[j].w < d[edge[j].u]))
+            {
+                //d[j] = d[edge[j].u] + edge[j].u;
+                d[j] = d[u] + GR[u][j];
+                //d[edge[j].u] = d[edge[j].v] + edge[j].w;
+            }
+        }
+    }
+
+
+    cout << endl << "Путь от вершины " << start << " до ";
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        cout << endl << i << " = " << d[i];
+    }
+}
 int main()
 {
     setlocale(LC_ALL, "RUS");
