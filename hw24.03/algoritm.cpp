@@ -114,6 +114,81 @@ void Deijkstra(int n, int start) // m - количество ребер, n -  к
         cout << endl << i << " = " << d[i];
     }
 }
+
+void originalFloydWarshall(int n) {
+    //Пробегаемся по всем вершинам и ищем более короткий путь
+    //через вершину k
+    int** matrix = new int* [n + 1];
+    for (int i = 0; i < n + 1; i++)
+    {
+        matrix[i] = new int[n + 1];
+    }
+    
+    int s = 1;
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        for (int j = 1; j < n + 1; j++)
+        {
+            matrix[i][j] = edge[s].w;
+            s++;
+        }
+    }
+
+    //for (int i = 1; i < n + 1; i++) matrix[i][i] = 0;
+
+
+    for (int k = 1; k < n + 1; k++) {
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                //Новое значение ребра равно минимальному между старым
+                //и суммой ребер i <-> k + k <-> j (если через k пройти быстрее)
+                if (matrix[i][k] && matrix[k][j] && i != j)
+                {
+                    if (matrix[i][k] + matrix[k][j] < matrix[i][j] || matrix[i][j] == 0)
+                    {
+                        matrix[i][j] = matrix[i][k] + matrix[k][j];
+                    }
+                }
+                //matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+            }
+        }
+    }
+
+    int* temp = new int[n + 1];
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        for (int j = 1; j < n + 1; j++)
+        {
+            temp[j] = matrix[i][j];
+        }
+        /*for (int k = 1; k< n+1; k++)
+            cout << te*/
+        for (int k = 1; k < n; k++)
+        {
+            if (temp[k]!= 0 && temp[k + 1]!=0) d[i] = min(temp[k], temp[k + 1]);
+        }
+    }
+    d[1] = 0;
+
+    cout << endl << "Путь от вершины 1"  << " до ";
+
+    for (int i = 1; i < n + 1; i++)
+    {
+        cout << endl << i << " = " << d[i];
+    }
+    
+
+
+    //
+    /*for (int i = 1; i < n+1; i++)
+    {
+        for (int j = 0; j < n+1; j++) cout << matrix[i][j] << "\t";
+        cout << endl;
+    };*/
+}
+
 int main()
 {
     setlocale(LC_ALL, "RUS");
