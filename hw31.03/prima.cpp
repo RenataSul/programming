@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -20,6 +19,9 @@ struct Graph {
     }
 };
 
+int d[3] = {};
+int vertex=0;
+
 int prim_algorithm(const Graph& graph) {
     int min_cost = 0; // стоимость минимального остовного дерева
     vector<bool> visited(graph.V, false); // массив посещенных вершин
@@ -35,9 +37,13 @@ int prim_algorithm(const Graph& graph) {
         }
         visited[u] = true; // отметить вершину как посещенную
         min_cost += w; // добавить вес ребра к стоимости минимального остовного дерева
+        d[vertex] = u;
+        vertex++;
+        //cout << u << " "<< endl;
         for (auto& [v, w] : graph.adj[u]) { // проходим по всем соседям вершины
             if (!visited[v]) { // если соседняя вершина не посещена
                 pq.emplace(w, v); // добавляем ребро в очередь
+
             }
         }
     }
@@ -45,19 +51,23 @@ int prim_algorithm(const Graph& graph) {
 }
 
 int main() {
-    int n = 5; // количество вершин
+    int n = 3; // количество вершин
     Graph graph(n); // создаем граф
 
     // добавляем ребра графа
-    graph.add_edge(0, 1, 2);
-    graph.add_edge(0, 3, 6);
-    graph.add_edge(1, 2, 3);
-    graph.add_edge(1, 3, 8);
-    graph.add_edge(1, 4, 5);
-    graph.add_edge(2, 4, 7);
-    graph.add_edge(3, 4, 9);
+    graph.add_edge(0, 1, 1);
+    //graph.add_edge(0, 3, 6);
+    graph.add_edge(1, 2, 1);
+//    graph.add_edge(1, 3, 8);
+//    graph.add_edge(1, 4, 5);
+//    graph.add_edge(2, 4, 7);
+//    graph.add_edge(3, 4, 9);
 
+    
     cout << "Minimum Weight: " << prim_algorithm(graph) << endl;
-
+    for (int i = 0; i < n-1; i++)
+    {
+        cout<< "(" <<d[i]<< "," << d[i+1]<< ")"<< endl;
+    }
     return 0;
 }
